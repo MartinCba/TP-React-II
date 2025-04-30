@@ -1,20 +1,20 @@
-import { Button } from '../../components/Button/Button';
+
 import Card from '../../components/Card/Card';
 import { useGetGames } from '../../services/Games/useGetGames';
+import  Header  from "../../components/Header/Header";
+import  Footer  from "../../components/Footer/Footer";
 
 const Home = () => {
   const { games, loading, error } = useGetGames();
   const firstGame = games[0];
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-extrabold text-blue-600 mb-4">Home</h1>
-      <p className="mb-4 text-lg">Tailwind está funcionando correctamente.</p>
-      <Button variant="danger" onClick={() => alert('¡Tailwind funciona!')}>
-        Probar componente
-      </Button>
-      <div className="mt-8">
-        {loading && <p>Cargando juegos...</p>}
+    <div className='flex justify-center items-center flex-col'>
+      <Header />
+
+
+      <div className='min-h-screen w-full'>
+        {loading && <h1 className='m- text-xl'>Cargando juegos...</h1>}
         {error && <p className="text-red-500">{error}</p>}
         {firstGame && (
           <Card
@@ -25,6 +25,9 @@ const Home = () => {
           />
         )}
       </div>
+
+
+      <Footer />
     </div>
   );
 };
