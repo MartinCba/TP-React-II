@@ -6,24 +6,28 @@ import  Footer  from "../../components/Footer/Footer";
 
 const Home = () => {
   const { games, loading, error } = useGetGames();
-  const firstGame = games[0];
+  const firstGame = games[1];
 
   return (
     <div className='flex justify-center items-center flex-col'>
       <Header />
 
 
-      <div className='min-h-screen w-full'>
+      <div className='flex flex-wrap flex-initial  min-h-screen w-full '>
         {loading && <h1 className='m- text-xl'>Cargando juegos...</h1>}
         {error && <p className="text-red-500">{error}</p>}
-        {firstGame && (
-          <Card
-            name={firstGame.name}
-            background_image={firstGame.background_image}
-            rating={firstGame.rating}
-            released={firstGame.released}
-          />
-        )}
+        {
+          games.map((game)=>{
+            return(
+              <Card
+              name={game.name}
+              background_image={game.background_image}
+              rating={game.rating}
+              released={game.released}
+            />
+            )
+          })
+        }
       </div>
 
 
