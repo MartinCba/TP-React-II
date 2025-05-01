@@ -16,6 +16,7 @@ export const axiosInstance = axios.create({
 export const fetchWithAxios = async (endpoint: string, params = {}) => {
   try {
     const response = await axiosInstance.get(endpoint, { params });
+    console.log(response)
     return response.data;
   } catch (error) {
     console.error('Error en fetchWithAxios:', error);
