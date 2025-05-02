@@ -1,16 +1,34 @@
-import { Button } from '../../components/Button/Button';
+import { useEffect, useState } from 'react';
 import Card from '../../components/Card/Card';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
+import Input from '../../components/Input/Input';
 import { useGetGames } from '../../services/Games/useGetGames';
+// import { useTranslation } from 'react-i18next'; VER MAS TARDE
+
+// const { t } = useTranslation();
+
+
+
+
 
 const Home = () => {
-  const { games, loading, error } = useGetGames();
+  const [inputSearch, setInputSearch] = useState("");
+  const { games, loading, error } = useGetGames(inputSearch);
+
+
+
+  
+  const obtenerValueBuscador = (text: string) => {
+    setInputSearch(text);
+  };
 
   return (
-    <div className='flex justify-center items-center flex-col'>
+    <div className='flex justify-center items-center flex-col '>
       <Header />
-      <div className='flex flex-wrap justify-center min-h-screen w-full'>
+      <Input obtenerValueBuscador={obtenerValueBuscador} />
+
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5'>
         {loading && <p>Cargando juegos...</p>}
         {error && <p className="text-red-500">{error}</p>}
         {
