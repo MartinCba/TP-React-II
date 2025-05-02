@@ -28,10 +28,11 @@ const Home = () => {
       <Header />
       <Input obtenerValueBuscador={obtenerValueBuscador} />
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5'>
-        {loading && <p>Cargando juegos...</p>}
+        {loading && <img className=' flex mb-600 ' src='https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWlzdDBjdmdnOWl1eWlscGM5bGpnZHFjYzh4NHFqdHB1OWl2bXp1ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/09Z52rkIsAgRuIKkO6/giphy.gif' ></img>}
+        {games.length === 0 && <img className=' flex mb-600 ' src='https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDI1b3dqbGp1eDVxODBlM3Q0Z29ndzQ4a3RweGpkOXh4NDk3YTR6cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/n6sYAGZPya5QhFlLxq/giphy.gif'></img>}
         {error && <p className="text-red-500">{error}</p>}
-        {
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5'>
+        {games &&
           games.map((game) => (
             <Card
               key={game.id}
