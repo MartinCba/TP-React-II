@@ -5,4 +5,5 @@ export type Game ={
   background_image: string;
   rating: number;
   released: string;
+  onClick:(id: number) => void;
 }

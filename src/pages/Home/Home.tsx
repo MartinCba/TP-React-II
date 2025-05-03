@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Card from '../../components/Card/Card';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Input from '../../components/Input/Input';
 import { useGetGames } from '../../services/Games/useGetGames';
+import { useNavigate } from 'react-router';
+import {ROUTES} from "../../const/routes"
 // import { useTranslation } from 'react-i18next'; VER MAS TARDE
 
 // const { t } = useTranslation();
@@ -15,6 +17,12 @@ import { useGetGames } from '../../services/Games/useGetGames';
 const Home = () => {
   const [inputSearch, setInputSearch] = useState("");
   const { games, loading, error } = useGetGames(inputSearch);
+  const navigate = useNavigate()
+
+  const gameDetail = (id: number) =>{
+    navigate(ROUTES.details+`/?id=${id}`)
+  }
+
 
 
 
@@ -35,11 +43,12 @@ const Home = () => {
         {games &&
           games.map((game) => (
             <Card
-              key={game.id}
+              id={game.id}
               name={game.name}
               background_image={game.background_image}
               rating={game.rating}
               released={game.released}
+              onClick={gameDetail}
             />
           ))
         }
