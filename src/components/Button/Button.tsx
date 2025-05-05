@@ -1,3 +1,4 @@
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ButtonProps, ButtonVariant } from '../../types/Button';
 
@@ -11,12 +12,13 @@ const variantClasses: Record<ButtonVariant, string> = {
   ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
 };
 
-export const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   variant = 'default',
   className = '',
   disabled,
+  type = 'button',
 }) => {
   const isDisabled = variant === 'disabled' || disabled;
   const classes = twMerge(
@@ -26,8 +28,10 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   return (
-    <button onClick={onClick} disabled={isDisabled} className={classes}>
+    <button onClick={onClick} disabled={isDisabled} className={classes} type={type}>
       {children}
     </button>
   );
-}; 
+};
+
+export default Button; 

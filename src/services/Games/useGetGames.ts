@@ -14,7 +14,7 @@ export const useGetGames = () => {
       try {
         const data = await fetchWithAxios('/games', {
           ordering: '-rating',
-          page_size: 10,
+          page_size: 20,
         });
         setGames(data.results || []);
       } catch (err: any) {

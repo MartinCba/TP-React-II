@@ -13,4 +13,5 @@ export interface ButtonProps {
   variant?: ButtonVariant;
   className?: string;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 } 
