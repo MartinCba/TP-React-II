@@ -26,6 +26,9 @@ const Home = () => {
 
 
 
+
+
+
   
   const obtenerValueBuscador = (text: string) => {
     setInputSearch(text);

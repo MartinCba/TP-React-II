@@ -1,5 +1,8 @@
+import { Button } from "../Button/Button";
 
-export default function CardDetails({ game }) {
+
+export default function CardDetails({ game , onClick, childrenButton}: any) {
+    console.log(childrenButton);
     return (
         <div className="flex justify-center items-center flex-col bg-[#2e165b] w-xl8 h-xl3 mb-60 mt-10 p-5 border border-red-800 rounded-2xl">
             <div className="flex justify-center items-center">
@@ -10,10 +13,11 @@ export default function CardDetails({ game }) {
                     <h1>Sitio web: <a href={game.website}></a>{game.website}</h1>
                     <h1>Rating: {game.rating}</h1>
                     <h1>Slug: {game.slug}</h1>
+                    <Button children={childrenButton} className="m-5" onClick={onClick}/>
 
                 </div>
             </div>
-            <p>{game.description_raw}</p>
+            <p className="m-15">{game.description_raw}</p>
 
         </div>
     )

@@ -9,21 +9,40 @@ const Details = () => {
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
-
   const { game, loading, error } = useGetGameById(id);
+  const [favText, setFavText] = useState("");
+  const [isFav, setIsFav] = useState(false);
 
-  useEffect(() => {
-    if (game) {
-      console.log("Game:", game);
+
+
+  useEffect(()=>{
+    if(!game) return;
+    if(JSON.parse(localStorage.getItem('favorites') || '[]').includes(game.id)){
+      setFavText("Quitar de la lista de deseos");
+    }else{
+      setFavText("Agregar a la lista de deseos");
     }
-  }, [game]);
+  },[isFav, game])
 
 
+
+
+  const toggleFavorite = () => {
+    if (!game) return;
   
-
-
-
-
+    const stored = localStorage.getItem('favorites');
+    let favs: number[] = stored ? JSON.parse(stored) : [];
+  
+    if (favs.includes(game.id)) {
+      favs = favs.filter(fav => fav !== game.id);
+      setIsFav(false);
+    } else {
+      favs.push(game.id);
+      setIsFav(true); 
+    }
+  
+    localStorage.setItem('favorites', JSON.stringify(favs));
+  };
 
 
 
@@ -36,7 +55,7 @@ const Details = () => {
 
 
 
-        {game &&<CardDetails game={game}/>}
+        {game &&<CardDetails game={game} onClick={toggleFavorite} childrenButton={favText}/>}
 
 
 
