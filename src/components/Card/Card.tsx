@@ -3,12 +3,14 @@ import { Game } from '../../types/Game';
 import { Heart, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getItem, setItem } from '../../services/localStorage';
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_IMAGE = 'https://gbatemp.net/attachments/scr_1_top_right-png.70711/';
 
 const Card: React.FC<{ data: Game; onFavorite?: () => void }> = ({ data, onFavorite }) => {
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = React.useState(false);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     const favs = getItem<number[]>('favorites') || [];
@@ -62,7 +64,7 @@ const Card: React.FC<{ data: Game; onFavorite?: () => void }> = ({ data, onFavor
       </div>
       <div className="p-4 flex flex-col gap-1">
         <div className="font-bold text-white truncate">{data.name}</div>
-        <div className="text-gray-400 text-sm truncate">Lanzamiento: {data.released}</div>
+        <div className="text-gray-400 text-sm truncate">{t('Lanzamiento')}: {data.released}</div>
       </div>
     </div>
   );
