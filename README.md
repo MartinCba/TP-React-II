@@ -121,16 +121,15 @@ Vista principal con filtros, búsqueda y listado de juegos.
 
 ![Home](src/assets/screenshots/home.png)
 
-### Favoritos
-Lista de juegos marcados como favoritos por el usuario.
-
-![Favoritos](src/assets/screenshots/favoritos.png)
-
 ### Detalles de Juego
 Vista con información completa, botón de favoritos y exportar a PDF.
 
 ![Detalles](src/assets/screenshots/detalles.png)
 
+### Favoritos
+Lista de juegos marcados como favoritos por el usuario.
+
+![Favoritos](src/assets/screenshots/favoritos.png)
 ---
 
 
