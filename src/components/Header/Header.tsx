@@ -8,12 +8,6 @@ const Header: React.FC = () => {
   const { i18n, t } = useTranslation();
   const [lang, setLang] = useState<'es' | 'en'>('es');
 
-  const changeLang = (lng: 'es' | 'en') => {
-    i18n.changeLanguage(lng);
-    setLang(lng);
-    localStorage.setItem('lang', lng);
-  };
-
   return (
     <header className="sticky top-0 z-50 bg-neutral-900/95 backdrop-blur border-b border-neutral-800 shadow flex items-center justify-between px-6 py-3">
       <div className="flex items-center gap-4">
