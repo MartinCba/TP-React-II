@@ -1,30 +1,62 @@
-import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
-import { useGetGames } from '../../services/Games/useGetGames';
-import Title from '../../components/Title/Title';
+import { useGetGames, FilterType } from '../../services/Games/useGetGames';
+import FilterBar from '../../components/FilterBar/FilterBar';
+import Pagination from '../../components/Pagination/Pagination';
+import Spinner from '../../components/Spinner/Spinner';
+import { useState } from 'react';
+import InputField from '../../components/InputField/InputField';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-  const { games, loading, error } = useGetGames();
-  const firstGame = games[0];
+  const [filter, setFilter] = useState<FilterType>('popular');
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState('');
+  const { games, loading, error, hasNext, hasPrev } = useGetGames(filter, page, search);
+  const { t } = useTranslation();
+
+  const handleFilterChange = (newFilter: FilterType) => {
+    setFilter(newFilter);
+    setPage(1);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setPage(1);
+  };
 
   return (
     <div className="p-8 min-h-screen bg-neutral-900">
-      <Title className="mb-4">Home</Title>
-      <p className="mb-4 text-lg">Tailwind está funcionando correctamente.</p>
-      <Button variant="danger" onClick={() => alert('¡Tailwind funciona!')}>
-        Probar componente
-      </Button>
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-        {loading && <p>Cargando juegos...</p>}
-        {error && <p className="text-red-500">{error}</p>}
-        {!loading && !error && games.slice(0, 20).map((game) => (
-          <Card
-            key={game.id}
-            data={game}
-            onDelete={() => {}}
-          />
-        ))}
+      <div className="mb-6">
+        <FilterBar value={filter} onChange={handleFilterChange} />
       </div>
+      <div className="mb-6 max-w-xs">
+        <InputField
+          value={search}
+          onChange={handleSearchChange}
+          placeholder={t('Buscar juegos...')}
+        />
+      </div>
+      {loading ? (
+        <div className="flex justify-center items-center min-h-[300px]">
+          <Spinner />
+        </div>
+      ) : (
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+          {error && <p className="text-red-500">{error}</p>}
+          {!error && games.length === 0 && (
+            <p className="text-gray-400 col-span-full text-center text-lg">{t('No se encontraron juegos para tu búsqueda.')}</p>
+          )}
+          {!error && games.map((game) => (
+            <Card
+              key={game.id}
+              data={game}
+            />
+          ))}
+        </div>
+      )}
+      {!loading && games.length > 0 && (
+        <Pagination page={page} onPageChange={setPage} hasNext={hasNext} hasPrev={hasPrev} />
+      )}
     </div>
   );
 };

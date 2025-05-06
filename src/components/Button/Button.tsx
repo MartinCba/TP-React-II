@@ -10,6 +10,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   dark: 'bg-black text-white hover:bg-gray-800',
   light: 'bg-white text-black hover:bg-gray-300',
   ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
+  filter: 'border border-yellow-400 px-4 py-2 rounded transition-colors font-semibold bg-neutral-800 text-gray-200 hover:bg-yellow-500 hover:text-black',
 };
 
 const Button: React.FC<ButtonProps> = ({

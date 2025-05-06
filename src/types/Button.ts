@@ -6,6 +6,7 @@ export type ButtonVariant =
   | 'dark'
   | 'light'
   | 'ghost'
+  | 'filter'
 
 export interface ButtonProps {
   children: React.ReactNode;

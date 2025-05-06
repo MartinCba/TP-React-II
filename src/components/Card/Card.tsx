@@ -1,68 +1,68 @@
 import React from 'react';
-import Button from '../Button/Button';
 import { Game } from '../../types/Game';
+import { Heart, Star } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { getItem, setItem } from '../../services/localStorage';
 
-const DEFAULT_IMAGE = 'https://images.wondershare.com/recoverit/article/2019/11/common-video-errors-01.jpg';
+const DEFAULT_IMAGE = 'https://gbatemp.net/attachments/scr_1_top_right-png.70711/';
 
-type CardProps = {
-  data: Game;
-  onMarkAsViewed?: () => void;
-  onDelete: () => void;
-  onEdit?: () => void;
-};
+const Card: React.FC<{ data: Game; onFavorite?: () => void }> = ({ data, onFavorite }) => {
+  const navigate = useNavigate();
+  const [isFavorite, setIsFavorite] = React.useState(false);
 
-const Card: React.FC<CardProps> = ({ data, onMarkAsViewed, onDelete, onEdit }) => {
+  React.useEffect(() => {
+    const favs = getItem<number[]>('favorites') || [];
+    setIsFavorite(favs.includes(data.id));
+  }, [data.id]);
+
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const favs = getItem<number[]>('favorites') || [];
+    let newFavs;
+    if (favs.includes(data.id)) {
+      newFavs = favs.filter(id => id !== data.id);
+    } else {
+      newFavs = [...favs, data.id];
+    }
+    setItem('favorites', newFavs);
+    setIsFavorite(newFavs.includes(data.id));
+    if (onFavorite) onFavorite();
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md transition-all duration-300 w-full h-full flex flex-col relative hover:-translate-y-1 hover:shadow-lg">
-      <div className="relative w-full pt-[56.25%] overflow-hidden">
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-center transition-transform duration-300"
-          style={{ backgroundImage: `url(${data.background_image || DEFAULT_IMAGE})` }}
+    <div
+      className="relative bg-neutral-800 rounded-xl shadow-lg overflow-hidden flex flex-col min-w-0 cursor-pointer hover:scale-[1.025] transition-transform"
+      onClick={() => navigate(`/details/${data.id}`)}
+      tabIndex={0}
+      role="button"
+      aria-label={`Ver detalles de ${data.name}`}
+      onKeyDown={e => { if (e.key === 'Enter') navigate(`/details/${data.id}`); }}
+    >
+      <div className="relative">
+        <img
+          src={data.background_image || DEFAULT_IMAGE}
+          alt={data.name}
+          className="w-full h-56 object-cover rounded-t-xl"
+          onError={e => {
+            (e.currentTarget as HTMLImageElement).src = DEFAULT_IMAGE;
+          }}
         />
-        <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start bg-gradient-to-b from-black/60 to-transparent">
-          <div className="inline-block px-3 py-1 bg-white/80 text-gray-800 rounded-full text-xs font-medium capitalize backdrop-blur-sm">
-            {data.name}
-          </div>
-          <div className="flex items-center gap-1 bg-white/80 px-3 py-1 rounded-full backdrop-blur-sm text-gray-800">
-            <span className="text-yellow-500 text-base">★</span>
-            <span className="text-sm">{data.rating}/5</span>
-          </div>
+        <button
+          className={`absolute top-2 left-2 bg-black/60 hover:bg-black/80 rounded-full p-2 transition-colors ${isFavorite ? 'text-pink-500' : 'text-pink-400'}`}
+          onClick={handleFavorite}
+          aria-label={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+          type="button"
+        >
+          <Heart className="w-5 h-5" fill={isFavorite ? 'currentColor' : 'none'} strokeWidth={2.2} />
+        </button>
+        <div className="absolute top-2 right-2 bg-black/70 text-yellow-400 flex items-center gap-1 px-2 py-1 rounded">
+          <Star className="w-4 h-4" fill="currentColor" />
+          <span className="text-xs font-semibold">{data.rating}</span>
         </div>
       </div>
-      <div className="p-5 flex flex-col justify-between gap-4 flex-grow">
-        <div>
-          <h3 className="mb-2 text-lg font-semibold text-gray-900 line-clamp-2">{data.name}</h3>
-          <div className="text-gray-500 text-sm">
-            <p className="mb-1"><strong>Lanzamiento:</strong> {data.released}</p>
-          </div>
-        </div>
-        <div className="flex gap-2 pt-4 border-t border-gray-200">
-          {onMarkAsViewed && (
-            <Button
-              variant="default"
-              onClick={onMarkAsViewed}
-              className="flex-1 flex items-center justify-center gap-2"
-            >
-              <span className="text-lg">✓</span> Visto
-            </Button>
-          )}
-          {onEdit && (
-            <Button
-              variant="outline"
-              onClick={onEdit}
-              className="flex-1 flex items-center justify-center gap-2"
-            >
-              <span className="text-lg">✎</span> Editar
-            </Button>
-          )}
-          <Button
-            variant="danger"
-            onClick={onDelete}
-            className="flex-1 flex items-center justify-center gap-2"
-          >
-            <span className="text-lg">×</span> Eliminar
-          </Button>
-        </div>
+      <div className="p-4 flex flex-col gap-1">
+        <div className="font-bold text-white truncate">{data.name}</div>
+        <div className="text-gray-400 text-sm truncate">Lanzamiento: {data.released}</div>
       </div>
     </div>
   );
