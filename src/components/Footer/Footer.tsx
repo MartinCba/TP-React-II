@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
           <span>© {new Date().getFullYear()} Just Play. {t('Todos los derechos reservados.')}</span>
         </div>
         <div className="flex gap-4 items-center">
-          <a href="https://github.com/justplay" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+          <a href="https://github.com/MartinCba/TP-React-II" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
             <Github className="w-6 h-6" />
           </a>
           <a href="https://twitter.com/justplay" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
