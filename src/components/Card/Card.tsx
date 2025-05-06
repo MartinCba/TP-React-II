@@ -48,7 +48,7 @@ const Card: React.FC<{ data: Game; onFavorite?: () => void }> = ({ data, onFavor
           }}
         />
         <button
-          className={`absolute top-2 left-2 bg-black/60 hover:bg-black/80 rounded-full p-2 transition-colors ${isFavorite ? 'text-pink-500' : 'text-pink-400'}`}
+          className={`absolute top-2 left-2 bg-black/60 hover:bg-black/80 rounded-full p-2 transition-colors ${isFavorite ? 'text-pink-500' : 'text-pink-400'} cursor-pointer`}
           onClick={handleFavorite}
           aria-label={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           type="button"

@@ -15,28 +15,28 @@ const FilterBar: React.FC<FilterBarProps> = ({ value, onChange }) => {
         <div className="flex gap-4 mb-6 flex-wrap">
             <Button
                 variant="filter"
-                className={value === 'popular' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}
+                className={`px-4 py-2 rounded font-bold shadow transition cursor-pointer ${value === 'popular' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}`}
                 onClick={() => onChange('popular')}
             >
                 {t('Populares')}
             </Button>
             <Button
                 variant="filter"
-                className={value === 'rating' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}
+                className={`px-4 py-2 rounded font-bold shadow transition cursor-pointer ${value === 'rating' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}`}
                 onClick={() => onChange('rating')}
             >
                 {t('Top usuarios')}
             </Button>
             <Button
                 variant="filter"
-                className={value === 'metacritic' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}
+                className={`px-4 py-2 rounded font-bold shadow transition cursor-pointer ${value === 'metacritic' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}`}
                 onClick={() => onChange('metacritic')}
             >
                 {t('Top crítica')}
             </Button>
             <Button
                 variant="filter"
-                className={value === 'released' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}
+                className={`px-4 py-2 rounded font-bold shadow transition cursor-pointer ${value === 'released' ? 'bg-yellow-400 text-black font-bold hover:bg-yellow-400 hover:text-black' : ''}`}
                 onClick={() => onChange('released')}
             >
                 {t('Estrenos')}

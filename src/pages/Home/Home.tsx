@@ -6,12 +6,14 @@ import Spinner from '../../components/Spinner/Spinner';
 import { useState } from 'react';
 import InputField from '../../components/InputField/InputField';
 import { useTranslation } from 'react-i18next';
+import useDebounce from '../../hooks/useDebounce';
 
 const Home = () => {
   const [filter, setFilter] = useState<FilterType>('popular');
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const { games, loading, error, hasNext, hasPrev } = useGetGames(filter, page, search);
+  const debouncedSearch = useDebounce(search, 500);
+  const { games, loading, error, hasNext, hasPrev } = useGetGames(filter, page, debouncedSearch);
   const { t } = useTranslation();
 
   const handleFilterChange = (newFilter: FilterType) => {

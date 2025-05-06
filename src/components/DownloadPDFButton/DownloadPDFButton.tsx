@@ -69,7 +69,7 @@ const DownloadPDFButton: React.FC<DownloadPDFButtonProps> = ({ game, size = 'nor
   return (
     <button
       onClick={handleDownload}
-      className={`flex items-center gap-2 rounded font-bold shadow transition
+      className={`flex items-center gap-2 rounded font-bold shadow transition cursor-pointer
         ${size === 'tag' ? 'bg-yellow-400 hover:bg-yellow-300 text-black px-2 py-1 text-xs h-7' : ''}
         ${size === 'small' ? 'bg-yellow-400 hover:bg-yellow-300 text-black px-2 py-1 text-sm' : ''}
         ${size === 'normal' ? 'bg-yellow-400 hover:bg-yellow-300 text-black px-3 py-2' : ''}

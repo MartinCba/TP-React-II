@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [lang, setLang] = useState<'es' | 'en'>('es');
 
   const changeLang = (lng: 'es' | 'en') => {
@@ -19,8 +19,8 @@ const Header: React.FC = () => {
       <div className="flex items-center gap-4">
         <button
           onClick={() => navigate('/')}
-          className="text-yellow-400 hover:text-yellow-300 transition-colors p-2 rounded-full"
-          aria-label="Ir al inicio"
+          className="text-yellow-400 hover:text-yellow-300 transition-colors p-2 rounded-full cursor-pointer"
+          title={t('Inicio')}
         >
           <Gamepad2 className="w-7 h-7" />
         </button>
@@ -37,21 +37,21 @@ const Header: React.FC = () => {
         {/* Favoritos */}
         <button
           onClick={() => navigate('/favorites')}
-          className="text-pink-400 hover:text-pink-300 transition-colors p-2 rounded-full"
-          aria-label="Ir a favoritos"
+          className="text-pink-400 hover:text-pink-300 transition-colors p-2 rounded-full cursor-pointer"
+          title={t('Favoritos')}
         >
           <Heart className="w-6 h-6" fill="currentColor" />
         </button>
         <div className="flex gap-2 items-center">
           <button
-            className={`px-2 py-1 rounded text-sm font-semibold ${lang === 'es' ? 'bg-yellow-400 text-black' : 'bg-neutral-800 text-white'}`}
-            onClick={() => changeLang('es')}
+            onClick={() => { i18n.changeLanguage('es'); setLang('es'); localStorage.setItem('lang', 'es'); }}
+            className={`px-2 py-1 rounded text-sm font-semibold cursor-pointer ${lang === 'es' ? 'bg-yellow-400 text-black' : 'bg-neutral-800 text-white'}`}
           >
             ES
           </button>
           <button
-            className={`px-2 py-1 rounded text-sm font-semibold ${lang === 'en' ? 'bg-yellow-400 text-black' : 'bg-neutral-800 text-white'}`}
-            onClick={() => changeLang('en')}
+            onClick={() => { i18n.changeLanguage('en'); setLang('en'); localStorage.setItem('lang', 'en'); }}
+            className={`px-2 py-1 rounded text-sm font-semibold cursor-pointer ${lang === 'en' ? 'bg-yellow-400 text-black' : 'bg-neutral-800 text-white'}`}
           >
             EN
           </button>

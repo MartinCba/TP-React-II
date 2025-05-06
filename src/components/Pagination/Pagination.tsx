@@ -13,17 +13,17 @@ const Pagination: React.FC<PaginationProps> = ({ page, onPageChange, hasNext, ha
   return (
     <div className="flex gap-4 justify-center my-8">
       <button
+        className="px-4 py-2 rounded bg-neutral-800 text-white disabled:opacity-50 cursor-pointer"
+        onClick={() => hasPrev && onPageChange(page - 1)}
         disabled={!hasPrev}
-        onClick={() => onPageChange(page - 1)}
-        className="px-4 py-2 rounded bg-neutral-800 text-white disabled:opacity-50"
       >
         {t('Anterior')}
       </button>
       <span className="text-yellow-400 font-bold text-lg">{t('Página')} {page}</span>
       <button
+        className="px-4 py-2 rounded bg-neutral-800 text-white disabled:opacity-50 cursor-pointer"
+        onClick={() => hasNext && onPageChange(page + 1)}
         disabled={!hasNext}
-        onClick={() => onPageChange(page + 1)}
-        className="px-4 py-2 rounded bg-neutral-800 text-white disabled:opacity-50"
       >
         {t('Siguiente')}
       </button>

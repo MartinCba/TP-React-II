@@ -47,7 +47,7 @@ const Details: React.FC = () => {
     <div className="min-h-screen bg-neutral-900 flex flex-col items-center justify-center">
       <div className="bg-neutral-800 rounded-2xl shadow-xl p-10 flex flex-col items-center">
         <h1 className="text-3xl font-extrabold text-red-500 mb-4 drop-shadow">{t('404 - Juego no encontrado')}</h1>
-        <button onClick={() => navigate('/')} className="mt-2 px-6 py-2 bg-yellow-400 text-black rounded font-bold shadow hover:bg-yellow-300 transition">{t('Volver al inicio')}</button>
+        <button onClick={() => navigate('/')} className="mt-2 px-6 py-2 bg-yellow-400 text-black rounded font-bold shadow hover:bg-yellow-300 transition cursor-pointer">{t('Volver al inicio')}</button>
       </div>
     </div>
   );
@@ -57,7 +57,7 @@ const Details: React.FC = () => {
       <div className="w-full flex justify-start mb-4 mt-4 px-8">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1 text-yellow-400 hover:text-yellow-200 font-bold text-lg focus:outline-none bg-neutral-800 bg-opacity-90 px-4 py-2 rounded shadow"
+          className="flex items-center gap-1 text-yellow-400 hover:text-yellow-200 font-bold text-lg focus:outline-none bg-neutral-800 bg-opacity-90 px-4 py-2 rounded shadow cursor-pointer"
           title={t('Volver')}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -68,7 +68,7 @@ const Details: React.FC = () => {
       </div>
       <div className="w-full max-w-4xl p-8 bg-neutral-800 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-10 mt-4 relative">
         <button
-          className={`absolute top-6 right-6 bg-black/60 hover:bg-black/80 rounded-full p-3 transition-colors z-20 ${isFavorite ? 'text-pink-500' : 'text-pink-400'}`}
+          className={`absolute top-6 right-6 bg-black/60 hover:bg-black/80 rounded-full p-3 transition-colors z-20 ${isFavorite ? 'text-pink-500' : 'text-pink-400'} cursor-pointer`}
           aria-label={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
           type="button"
           onClick={() => {

@@ -75,7 +75,7 @@ const Favorites = () => {
         <div className="w-full flex justify-start pt-28 px-8">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-1 text-yellow-400 hover:text-yellow-200 font-bold text-lg focus:outline-none bg-neutral-800 bg-opacity-90 px-4 py-2 rounded shadow"
+            className="flex items-center gap-1 text-yellow-400 hover:text-yellow-200 font-bold text-lg focus:outline-none bg-neutral-800 bg-opacity-90 px-4 py-2 rounded shadow cursor-pointer"
             title={t('Volver')}
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -98,7 +98,7 @@ const Favorites = () => {
       <div className="w-full flex justify-start pt-12 px-8">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1 text-yellow-400 hover:text-yellow-200 font-bold text-lg focus:outline-none bg-neutral-800 bg-opacity-90 px-4 py-2 rounded shadow"
+          className="flex items-center gap-1 text-yellow-400 hover:text-yellow-200 font-bold text-lg focus:outline-none bg-neutral-800 bg-opacity-90 px-4 py-2 rounded shadow cursor-pointer"
           title={t('Volver')}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
